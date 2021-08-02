@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import './table-mahasiswa.css'
+import { Link } from "react-router-dom"
+
 
 class TableMahasiswa extends Component {
     constructor(props) {
@@ -12,21 +14,34 @@ class TableMahasiswa extends Component {
         let id = e.target.id
         console.log("edit id",id)
         handleSubmitNilai(id)
-        gtp("submit-nilai-mahasiswa")
+        // gtp("submit-nilai-mahasiswa")
     }
 
-    handleDetail=(e)=>{
+    handleDetailKRS=(e)=>{
         const {gtp, handleDetail}=this.props
         let id = e.target.id
         let name = e.target.name
         console.log("id detail", id)
         handleDetail(id,name)
+        // if(name==="nilaiDetail"){
+        //     gtp("detail-krs-mahasiswa")
+        // }else{
+        //     gtp("detail-profile-mahasiswa")
+        // }
 
-        if(name==="nilaiDetail"){
-            gtp("detail-krs-mahasiswa")
-        }else{
-            gtp("detail-profile-mahasiswa")
-        }
+    }
+
+    handleDetailProfile=(e)=>{
+        const {gtp, handleDetail}=this.props
+        let id = e.target.id
+        let name = e.target.name
+        console.log("id detail", id)
+        handleDetail(id,name)
+        // if(name==="nilaiDetail"){
+        //     gtp("detail-krs-mahasiswa")
+        // }else{
+        //     gtp("detail-profile-mahasiswa")
+        // }
 
     }
 
@@ -42,20 +57,26 @@ class TableMahasiswa extends Component {
                     <td className="cell">{data.strata}</td>
                     <td className="cell">{data.semester}</td>
                     <td className="cell action">
-                        <button style={{borderRadius: 10, width: 100, height: 30,cursor: "pointer", marginRight: 10}} id={data.id}
-                                onClick={this.handleSubmitNilai}
-                        >Submit Nilai
-                        </button>
+                        <Link to="submit-nilai-mahasiswa">
+                            <button style={{borderRadius: 10, width: 100, height: 30,cursor: "pointer", marginRight: 10}} id={data.id}
+                                    onClick={this.handleSubmitNilai}>Submit Nilai
+                            </button>
+                        </Link>
+
+                        <Link to="detail-krs-mahasiswa">
                         <button name="nilaiDetail" style={{borderRadius: 10, width: 100, height: 30,cursor: "pointer", marginRight: 10}} id={data.id}
-                            onClick={this.handleDetail}
+                            onClick={this.handleDetailKRS}
                         >Detail KRS
                         </button>
+                        </Link>
 
+                        <Link to="detail-profile-mahasiswa">
                         <button name="profileDetail" style={{borderRadius: 10, width: 100, height: 30,cursor: "pointer", marginRight: 0}} id={data.id}
 
-                                onClick={this.handleDetail}
+                                onClick={this.handleDetailProfile}
                         >Detail Profile
                         </button>
+                        </Link>
                     </td>
                 </tr>
             )

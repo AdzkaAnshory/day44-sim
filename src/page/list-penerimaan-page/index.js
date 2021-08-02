@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Table} from '../../component';
 import "./penerimaan.css"
+import { Link } from "react-router-dom"
+
 
 class Penerimaan extends Component {
     constructor(props) {
@@ -33,7 +35,7 @@ class Penerimaan extends Component {
                 // }
             }
         })
-        console.log("list fix",list)
+        // console.log("list fix",list)
        
         return ( 
             <div className="penerimaan-container">
@@ -43,7 +45,9 @@ class Penerimaan extends Component {
                     headerName={["No","Nama","NIM","Jurusan","Strata","Tahun Masuk Akademik"]}
                     //NOTE : dataList.length must be headerName.length-1 (for cell number)
                 />
-                <button className="backButtonToForm" onClick={() => this.props.goToPage("form")}> Back to Form </button>
+                <Link to="/form">
+                    <button className="backButtonToForm"> Back to Form </button> 
+                </Link>
             </div>
          );
     }
