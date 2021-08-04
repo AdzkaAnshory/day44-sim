@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import './tabel.css'
+import { connect } from 'react-redux';
+import { waitFor } from '@testing-library/react';
+
 
 class TabelSks extends Component {
     constructor(props) {
@@ -70,7 +73,6 @@ class TabelSks extends Component {
 
 
     onSaveEdit = id =>{
-        const editlist = this.props.editlist
 		const newData = {
 			idsks: id + 1,
 			matkul: this.state.inputMatkul,
@@ -89,11 +91,10 @@ class TabelSks extends Component {
 			inputDosen: ""
 
         })
-        editlist(sksUpdate)
+        this.props.editlist(sksUpdate)
 	}
 
     onCancel = id =>{
-        const editlist = this.props.editlist
 		const newData = {
 			idsks: id + 1,
 			matkul: this.state.inputMatkul,
@@ -111,15 +112,13 @@ class TabelSks extends Component {
 			inputIdjurusan: "",
 			inputDosen: ""
         })
-        editlist(sksUpdate)
+        this.props.editlist(sksUpdate)
     }
 
     deleteHandler = id =>{
-        const editlist = this.props.editlist
-	
 		let sksUpdate = this.state.sksList
 		sksUpdate.splice(id, 1)
-        editlist(sksUpdate)
+		this.props.editlist(sksUpdate)
     }
 
     renderList = () =>{
@@ -215,5 +214,13 @@ class TabelSks extends Component {
          );
     }
 }
- 
-export default TabelSks;
+
+const mapStateToProps = state => ({
+    listSks: state.Auth.listSks
+})
+
+const mapDispatchToProps = dispatch => ({
+    editlist: sks => dispatch({ type: "EDIT_LIST", payload: { sks } })
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(TabelSks);

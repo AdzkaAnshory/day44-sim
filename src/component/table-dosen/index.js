@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./tabeldosen.css";
 import EditIcon from "@material-ui/icons/Edit";
 import { ListDosen } from "../../page";
+import { connect } from 'react-redux';
+
 
 class TabelDosen extends Component {
   constructor(props) {
@@ -78,13 +80,6 @@ class TabelDosen extends Component {
       matkul3: this.state.inputMataKuliah3,
       status: "",
     };
-    // if (!newData === null) {
-    //   this.props.addNewDosen(newData);
-    //   alert("success Input");
-    // } else {
-    //   this.props.onSaveEdit(newData);
-    //   return alert("Data Kosong");
-    // }
     let dosenUpdate = this.state.ListDosen;
     dosenUpdate.splice(id, 1, newData);
     this.setState({
@@ -95,7 +90,7 @@ class TabelDosen extends Component {
       inputMataKuliah2: "",
       inputMataKuliah3: "",
     });
-    console.log("save", newData);
+    this.props.editlistDosen(dosenUpdate)
   };
 
   // Bagian Tombol Cancel Untuk Membatalkan Edit
@@ -121,7 +116,7 @@ class TabelDosen extends Component {
       inputMataKuliah2: "",
       inputMataKuliah3: "",
     });
-    console.log("cancel", newData);
+    this.props.editlistDosen(dosenUpdate)
   };
 
   // Bagian Delete Data
@@ -129,6 +124,7 @@ class TabelDosen extends Component {
     let dosenUpdate = this.state.ListDosen;
     dosenUpdate.splice(id, 1);
     console.log("delete", dosenUpdate);
+    this.props.editlistDosen(dosenUpdate)
   };
 
   // Bagian Tambah Data
@@ -163,72 +159,28 @@ class TabelDosen extends Component {
           <tr key={index}>
             <td>{index + 1}</td>
             <td>
-              <input
-                placeholder="Nama"
-                name="inputNama"
-                type="text"
-                value={this.state.inputNama}
-                onChange={this.onChangeHandler}
-              />
+              <input placeholder="Nama"  name="inputNama" type="text" value={this.state.inputNama} onChange={this.onChangeHandler}/>
             </td>
             <td>
-              <input
-                placeholder="Nomor Induk Dosen"
-                name="inputNID"
-                type="text"
-                value={this.state.inputNID}
-                onChange={this.onChangeHandler}
-              />
+              <input placeholder="Nomor Induk Dosen" name="inputNID" type="text" value={this.state.inputNID} onChange={this.onChangeHandler} />
             </td>
             <td>
-              <input
-                placeholder="Jurusan"
-                name="inputJurusan"
-                type="text"
-                value={this.state.inputJurusan}
-                onChange={this.onChangeHandler}
-              />
+              <input placeholder="Jurusan" name="inputJurusan" type="text" value={this.state.inputJurusan} onChange={this.onChangeHandler}/>
             </td>
             <td>
-              <input
-                placeholder="Mata Kuliah Ke-1"
-                name="inputMataKuliah1"
-                type="text"
-                value={this.state.inputMataKuliah1}
-                onChange={this.onChangeHandler}
-              />
+              <input placeholder="Mata Kuliah Ke-1" name="inputMataKuliah1" type="text" value={this.state.inputMataKuliah1} onChange={this.onChangeHandler}/>
               <br />
               <br />
-              <input
-                placeholder="Mata Kuliah Ke-2"
-                name="inputMataKuliah2"
-                type="text"
-                value={this.state.inputMataKuliah2}
-                onChange={this.onChangeHandler}
-              />
+              <input placeholder="Mata Kuliah Ke-2" name="inputMataKuliah2" type="text" value={this.state.inputMataKuliah2} onChange={this.onChangeHandler}/>
               <br />
               <br />
-              <input
-                placeholder="Mata Kuliah Ke-3"
-                name="inputMataKuliah3"
-                type="text"
-                value={this.state.inputMataKuliah3}
-                onChange={this.onChangeHandler}
-              />
+              <input placeholder="Mata Kuliah Ke-3" name="inputMataKuliah3" type="text" value={this.state.inputMataKuliah3} onChange={this.onChangeHandler}/>
             </td>
             <br />
             <br />
             <td>
-              <button
-                className="save"
-                type="submit"
-                onClick={() => this.onSaveEdit(index)}
-              >
-                Save
-              </button>
-              <button className="cancel" onClick={() => this.onCancel(index)}>
-                Cancel
-              </button>
+              <button className="save" type="submit" onClick={() => this.onSaveEdit(index)}>Save</button>
+              <button className="cancel" onClick={() => this.onCancel(index)}>Cancel</button>
             </td>
           </tr>
         );
@@ -362,4 +314,13 @@ class TabelDosen extends Component {
   }
 }
 
-export default TabelDosen;
+
+const mapStateToProps = state => ({
+  ListDosen: state.Auth.ListDosen
+})
+
+const mapDispatchToProps = dispatch => ({
+  editlistDosen: dosen => dispatch({ type: "EDIT_DOSEN", payload: { dosen } })
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(TabelDosen);

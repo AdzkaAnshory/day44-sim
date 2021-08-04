@@ -8,7 +8,7 @@ class Nav extends Component {
     this.state = {};
   }
     render() {
-        const {currentPage, goToPage} = this.props
+        const {currentPage} = this.props
         return (
             <div className="nav-container">
                 <div className="logo" >

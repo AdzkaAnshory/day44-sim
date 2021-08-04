@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./tabeljurusan.css";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { connect } from 'react-redux';
+
 
 class TabelJurusan extends Component {
   constructor(props) {
@@ -62,7 +64,7 @@ class TabelJurusan extends Component {
     this.setState({
       inputJurusan: "",
     });
-    console.log("newData", newData);
+    this.props.editlistJurusan(updateJurusan)
   };
 
   // BAGIAN Untuk Membatalkan save Data
@@ -78,7 +80,7 @@ class TabelJurusan extends Component {
     this.setState({
       inputJurusan: "",
     });
-    console.log("updateJurusan", updateJurusan);
+    this.props.editlistJurusan(updateJurusan)
   };
 
   // Bagian Delete Data
@@ -88,7 +90,7 @@ class TabelJurusan extends Component {
     this.setState({
       ListJurusan: updateJurusan,
     });
-    console.log("delete", updateJurusan);
+    this.props.editlistJurusan(updateJurusan)
   };
 
   // Bagian Untuk Tambah Data
@@ -211,4 +213,12 @@ class TabelJurusan extends Component {
   }
 }
 
-export default TabelJurusan;
+const mapStateToProps = state => ({
+  ListJurusan: state.Auth.ListJurusan
+})
+
+const mapDispatchToProps = dispatch => ({
+  editlistJurusan: jurusan => dispatch({ type: "EDIT_JURUSAN", payload: { jurusan } })
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(TabelJurusan);
