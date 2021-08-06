@@ -17,8 +17,8 @@ const defaultState = {
 }
 
 const authReducer = (state = defaultState, action) => {
-    console.log("state:", state);
-    console.log("action:", action.payload);
+    // console.log("state:", state);
+    // console.log("action:", action.payload);
     switch (action.type) {
         case "EDIT_LIST":
             return {

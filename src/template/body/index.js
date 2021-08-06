@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-import {ListMahasiswa, RegisterPage, DetailProfile, ListPenerimaanPage} from "../../page";
-import FormSubmitNilaiPage from "../../page/form-submit-nilai-page";
-import DetailMahasiswaPage from "../../page/detail-mahasiswa-page";
 import ListSKS from '../../page/list-sks-page';
-import { ListDosen, ListJurusan } from "../../page";
+import { Login } from "../../page";
 import { Switch, Route } from "react-router-dom";
 
 class Body extends Component {
@@ -150,10 +147,13 @@ class Body extends Component {
         const {users, userEdit} = this.state
 
         return <Switch>
-                    <Route path="/list-dosen" >
+                    {/* <Route path="/list-dosen" >
                         <ListDosen />
+                    </Route> */}
+                    <Route path="/login" >
+                        <Login />
                     </Route>
-                    <Route path="/list-jurusan" >
+                    {/* <Route path="/list-jurusan" >
                         <ListJurusan />
                     </Route>
                     <Route path="/form" >
@@ -184,9 +184,9 @@ class Body extends Component {
                     </Route>
                     <Route path="/detail-profile-mahasiswa" >
                         <DetailProfile mhsProfileDetail={this.state.mhsProfileDetail} goToPage={goToPage} saveProfile={this.saveProfileHandler}/>
-                    </Route>
-                        <Route path="/sks" >
-                    <ListSKS/>
+                    </Route> */}
+                    <Route path="/sks" >
+                        <ListSKS/>
                     </Route>
                 </Switch>
         // if (currentPage === "list-dosen") return <ListDosen />;

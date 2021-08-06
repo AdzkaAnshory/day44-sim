@@ -19,9 +19,9 @@ class Nav extends Component {
                     <div className={`menu-item ${currentPage === "login" ? "active" : ""}`}>Login</div>
                   </Link>
                   <Link to="/sks">
-                    <div className={`menu-item ${currentPage === "sks" ? "active" : ""}`}>SKS</div>
+                    <div className={`menu-item ${currentPage === "list" ? "active" : ""}`}>List Kereta</div>
                   </Link>
-                  <Link to="/form">
+                  {/* <Link to="/form">
                     <div className={`menu-item ${currentPage === "form" ? "active" : ""}`}>Form</div>
                   </Link>
                   <Link to="/list-dosen">
@@ -35,7 +35,7 @@ class Nav extends Component {
                   </Link>
                   <Link to="/list-mahasiswa">
                     <div className={`menu-item ${currentPage === "list-mahasiswa" ? "active" : ""}`}>List Penilaian Mahasiswa</div>
-                  </Link>
+                  </Link> */}
 
                 </div>
             </div>

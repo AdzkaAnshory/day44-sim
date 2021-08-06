@@ -2,6 +2,8 @@
 import TabelJurusan from "./table-jurusan";
 import TabelDosen from "./table-dosen";
 import Input from "./input";
+import Inputt from "./inputt";
+import RowInput from "./rowInput";
 import TableMahasiswa from "./table-mahasiswa";
 import FormHeader from "./formHeader";
 import Form from "./form";
@@ -11,7 +13,7 @@ import Table from "./table";
 import Dialog from "./dialog";
 import TabelSks from "./tabel-sks";
 
-export {TableMahasiswa, Form, FormInput, FormButton, FormHeader, Input, Table, Dialog, TabelSks,  TabelJurusan, TabelDosen  }
+export {Inputt, RowInput, TableMahasiswa, Form, FormInput, FormButton, FormHeader, Input, Table, Dialog, TabelSks,  TabelJurusan, TabelDosen  }
 
 
 

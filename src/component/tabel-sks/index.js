@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './tabel.css'
 import { connect } from 'react-redux';
 import { waitFor } from '@testing-library/react';
+import axios from "axios"
 
 
 class TabelSks extends Component {
@@ -13,13 +14,46 @@ class TabelSks extends Component {
 			inputIdjurusan: "",
 			inputDosen: "",
             sksList:[],
+			keretaList:[]
          }
     }
 
     componentDidMount = () => {
-		this.setState({
-			sksList: this.props.listSks,
-		})
+		// this.setState({
+		// 	sksList: this.props.listSks,
+		// })
+			const url = 'http://localhost:8081/KeretaApi/kereta';
+			axios.get(url, {
+				headers: {
+				'Accept': 'application/json'
+				}
+			})
+			.catch(err => console.log("Error respond",err))
+			.then(res => {console.log("Data respond",res)
+				const kereta = res;
+				this.setState({ keretalist : kereta })	
+			})
+			// const url = fetch('localhost:8081/KeretaApi/users')
+				// url.then(response => {
+				// 	return response.json();
+				// })
+				// .then( responseJson => {
+				// 	const dataResponse = responseJson;
+				// 	const userArray = dataResponse.map((data, index)=> {
+				// 		return(
+				// 			{ iduser : data.id,
+			//         name : data.nama,
+				// 			  username : data.username,
+				// 			  password : data.password,
+				// 			  jabatan : data.jabatan
+				// 		}
+				// 		)
+				// 	})
+				// 	// console.log("asdasdasd", userArray);
+				// 	this.setState({
+				// 		usernew: userArray
+				// 	})
+				// });
 	}
 
     addHandler = () => {
@@ -122,8 +156,8 @@ class TabelSks extends Component {
     }
 
     renderList = () =>{
-		return this.state.sksList.map((users, index) => {
-            if(users.status && users.status === "new")
+		return this.state.keretaList.map((kereta, index) => {
+            if(kereta.status && kereta.status === "new")
 				return(
 					<tr key={index}>
 						<td></td>
@@ -137,7 +171,7 @@ class TabelSks extends Component {
 						</td>
 					</tr>
 				)
-			if(users.status && users.status === "edit")
+			if(kereta.status && kereta.status === "edit")
 				return (<tr key={index}>
 					<td>{index + 1}</td>
 					<td>
@@ -168,10 +202,14 @@ class TabelSks extends Component {
 			return (
 				<tr key={index}>
 					<td>{index + 1}</td>
-					<td>{users.matkul}</td>
-					<td>{users.jmlsks}</td>
-					<td>{users.idjurusan}</td>
-					<td>{users.dosen}</td>
+					<td>{kereta.nama}</td>
+					<td>{kereta.kelas}</td>
+					<td>{kereta.tgl_pergi}</td>
+					<td>{kereta.jam_pergi}</td>
+					<td>{kereta.jam_sampai}</td>
+					<td>{kereta.lama_perjalanan}</td>
+					<td>{kereta.asal}</td>
+					<td>{kereta.tujuan}</td>
 					<td>
 						<button className="btn-save-edit" onClick={() => this.editHandler(index)}>Edit</button>
 						<button className="btn-delete" onClick={() => this.deleteHandler(index)}>Delet</button>
@@ -186,7 +224,7 @@ class TabelSks extends Component {
     render() { 
         return ( 
             <>
-                <div className="main">
+                <div className="">
                     <div>
 						<button style={{marginLeft: 100}} className="btn-add" onClick={() => this.addHandler()}>Add New</button>
                         <hr></hr>
@@ -197,10 +235,14 @@ class TabelSks extends Component {
 					<thead>
 						<tr>
 							<th>No</th>
-							<th>Mata Kuliah</th>
-							<th>Jumlah SKS</th>
-							<th>Jurusan</th>
-							<th>Dosen</th>
+							<th>Nama Kereta</th>
+							<th>Kelas</th>
+							<th>Tgl Keberangkatan</th>
+							<th>Jam Keberangkatan</th>
+							<th>Jam Sampai</th>
+							<th>Lama Perjalanan</th>
+							<th>Asal</th>
+							<th>Tujuan</th>
 							<th>Action</th>
 						</tr>
 					</thead>

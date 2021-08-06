@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./tabeldosen.css";
 import EditIcon from "@material-ui/icons/Edit";
-import { ListDosen } from "../../page";
 import { connect } from 'react-redux';
 
 

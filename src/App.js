@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Body, Header, Nav} from "./template";
 import { BrowserRouter as Router } from "react-router-dom"
+import { Login } from './page'
 
 
 class App extends Component {
@@ -11,10 +12,13 @@ class App extends Component {
         }
     }
 
-    // setPage = page => this.setState({ page: page ? page : "login" })
+    setPage = page => this.setState({ page: page ? page : "login" })
 
-    render() {
+    renderedPage =()=>{
         const { page } = this.state
+        // if(this.state.page === "login"){return(<>
+        //             <Login setPage={this.setPage}/>
+        //         </>)}
         return (
             <>
                 <Router>
@@ -22,6 +26,14 @@ class App extends Component {
                     <Nav currentPage={page} />
                     <Body currentPage={page} />
                 </Router>
+            </>
+        );
+    }
+
+    render() {
+        return (
+            <>
+            {this.renderedPage()}
             </>
         );
     }
