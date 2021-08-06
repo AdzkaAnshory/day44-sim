@@ -1,6 +1,6 @@
 ﻿#Java API
 
-di upload di branch java-server
+di upload di https://github.com/AdzkaAnshory/React/tree/java-server
 
 # Note
 
